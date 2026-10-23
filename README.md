@@ -50,11 +50,36 @@ git pull --ff-only
 python3 scripts/install.py --check
 ```
 
-Make a skill change on one machine, review the diff, commit and push it, then pull on the other. If both machines have local changes, resolve them in Git. The symlinks expose changes immediately; no copy or reinstall is needed unless the skill list changes. Review new upstream versions separately using `sources.json`; this repo does not auto-update or overwrite adaptations.
+Make a skill change on one machine, review the diff, commit and push it, then pull on the other. If both machines have local changes, resolve them in Git. The symlinks expose changes immediately; no copy or reinstall is needed unless the skill list changes. Use the upstream checker below to review new source versions; this repo does not auto-update or overwrite adaptations.
 
 Each project remains a separate checkout on each machine. Give a task one active implementation owner at a time. To move it, commit/push intended code and use `handoff` with the repository, branch, revision, verification and portable evidence references. Uncommitted work, local processes, auth and scratch files do not transfer automatically. Work-only skills and context stay on the work machine.
 
 Tailwind documentation downloads are optional and remain local. See that skill for official-docs fallback and explicit cache initialization. No cache is downloaded by the installer.
+
+## Check Lauren's and Matt's upstream changes
+
+From this checkout on either machine:
+
+```sh
+python3 scripts/check_upstream.py
+```
+
+The checker uses Git and Python's standard library to fetch public upstream content into temporary bare repositories. It compares ten selected scopes against their last-reviewed commits in `sources.json`, including skill resources, new files and borrowed references. It never checks out or runs upstream code, edits installed skills, or advances review baselines.
+
+Open the printed `report.md` path for a summary and links to full upstream patches. `report.json` contains the same results for agents. Reports stay in the ignored `.local/upstream/` directory. A missing or moved source is flagged; a failed fetch is reported as an error, with exit code 1, rather than being called current. Completed checks exit 0 even when changes need review.
+
+To check one source or choose a new output directory:
+
+```sh
+python3 scripts/check_upstream.py --source pstack
+python3 scripts/check_upstream.py --source mattpocock --output /tmp/skills-upstream-review
+```
+
+Existing output directories are never overwritten. The default check covers pstack and Matt Pocock only. The Sanity and Tailwind reference packages retain their original folder hashes; those are not verified Git commits and need separate baseline work before update tracking can be added.
+
+Compare each changed source with the mapped local adaptation and adopt useful parts selectively. When a scope has been fully assessed, update its `update_tracking.items[].reviewed_commit` to the captured upstream commit, including when you deliberately decline the change. Record the decision in the commit message, validate affected skills, then commit/push and pull on the other machine. Leave unreviewed scopes pinned. Keep the original `audit_commit` as historical provenance.
+
+This checks net changes within the mapped scopes, not every new skill or change elsewhere in the source repositories. “Unchanged” means the upstream scope matches its reviewed baseline; it does not mean our personal adaptation is identical to upstream. Checks run only when invoked; no schedule is installed.
 
 ## Maintenance
 

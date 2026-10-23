@@ -10,7 +10,53 @@
     "references": [
       "diagnosing-bugs: premise check and performance checklist"
     ],
-    "license": "licenses/pstack.LICENSE"
+    "license": "licenses/pstack.LICENSE",
+    "update_tracking": {
+      "git_url": "https://github.com/cursor/plugins.git",
+      "ref": "HEAD",
+      "items": [
+        {
+          "id": "blast-radius",
+          "path": "pstack/skills/blast-radius",
+          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
+          "local_paths": [
+            "skills/blast-radius"
+          ]
+        },
+        {
+          "id": "create-verification-skill",
+          "path": "pstack/skills/create-verification-skill",
+          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
+          "local_paths": [
+            "skills/create-verification-skill"
+          ]
+        },
+        {
+          "id": "visual-parity",
+          "path": "pstack/skills/poteto-mode/playbooks/visual-parity.md",
+          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
+          "local_paths": [
+            "skills/create-verification-skill"
+          ]
+        },
+        {
+          "id": "attack-the-premise",
+          "path": "pstack/skills/principle-attack-the-premise",
+          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
+          "local_paths": [
+            "skills/diagnosing-bugs/SKILL.md"
+          ]
+        },
+        {
+          "id": "benchmark-checklist",
+          "path": "pstack/skills/benchmark-checklist",
+          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
+          "local_paths": [
+            "skills/diagnosing-bugs/references/benchmark-checklist.md"
+          ]
+        }
+      ]
+    }
   },
   "mattpocock": {
     "repository": "https://github.com/mattpocock/skills",
@@ -25,7 +71,53 @@
     "references": [
       "retro: writing-for-agents"
     ],
-    "license": "licenses/mattpocock.LICENSE"
+    "license": "licenses/mattpocock.LICENSE",
+    "update_tracking": {
+      "git_url": "https://github.com/mattpocock/skills.git",
+      "ref": "HEAD",
+      "items": [
+        {
+          "id": "diagnosing-bugs",
+          "path": "skills/engineering/diagnosing-bugs",
+          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "local_paths": [
+            "skills/diagnosing-bugs"
+          ]
+        },
+        {
+          "id": "grilling",
+          "path": "skills/productivity/grilling",
+          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "local_paths": [
+            "skills/grilling"
+          ]
+        },
+        {
+          "id": "handoff",
+          "path": "skills/productivity/handoff",
+          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "local_paths": [
+            "skills/handoff"
+          ]
+        },
+        {
+          "id": "retro",
+          "path": "skills/engineering/retro",
+          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "local_paths": [
+            "skills/retro/SKILL.md"
+          ]
+        },
+        {
+          "id": "writing-for-agents",
+          "path": "skills/productivity/writing-for-agents",
+          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "local_paths": [
+            "skills/retro/references/writing-for-agents.md"
+          ]
+        }
+      ]
+    }
   },
   "sanity-agent-toolkit": {
     "repository": "https://github.com/sanity-io/agent-toolkit",
