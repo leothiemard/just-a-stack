@@ -1,0 +1,18 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+*.log
+*.sqlite*
+*.db
+.t3/
+.local/
+backups/
+*credentials*
+*token*
+# Tailwind documentation is a locally generated, separately licensed cache.
+skills/tailwind-4-docs/references/docs/
+skills/tailwind-4-docs/references/docs-index.tsx
+skills/tailwind-4-docs/references/docs-source.txt
