@@ -1,6 +1,6 @@
 ---
 name: blast-radius
-description: Check persisted-data and contract compatibility for schema or GROQ renames, migrations, serialized APIs and deployment order. Use for contract blast-radius requests. General downstream-impact reviews use pstack:blast-radius when available. Skip cosmetic and isolated changes.
+description: Check persisted-data and contract compatibility for schema or GROQ renames, migrations, serialized APIs and deployment order. Use for contract blast-radius requests. General downstream-impact reviews use pstack:blast-radius when available; otherwise this skill handles them too. Skip cosmetic and isolated changes.
 metadata:
   inspired-by: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/blast-radius/SKILL.md
 ---

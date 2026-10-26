@@ -40,6 +40,8 @@ Descriptions select the workflow. Explicit skill names take precedence. When bot
 
 These boundaries clarify intended routing without uninstalling plugin resources that other workflows call. The scenario set in [evals/routing.json](evals/routing.json) records expected choices for checking real harness behavior. Folder names do not establish harness compatibility.
 
+Without pstack installed, the personal blast-radius and verifier skills also cover general impact reviews and requested project-local verifiers.
+
 ## Review-loop trial
 
 Invoke with "review loop this change" or "sol loop this change". It uses the requested reviewer, otherwise an available Sol model, and stops after at most three rounds. It preserves read-only requests and reports rejected findings, missing reviewers and unresolved objections honestly. It does not start babysitting or grant merge authority.

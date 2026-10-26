@@ -11,7 +11,7 @@ Get one review of the current change, fix confirmed problems within the caller's
 
 ## Frame
 
-Read the task, later corrections, applicable instructions and repository status. Identify the base, intended paths, observable goal and exclusions. Preserve unrelated work. Honor a read-only request. An ambiguous scope is a blocker, not permission to absorb other changes.
+Read the task, later corrections, applicable instructions and repository status. Identify the base, intended paths, observable goal and exclusions. Preserve unrelated work. A read-only run ends after one completed review with APPROVED or UNRESOLVED; do not spend more rounds on unchanged inputs. An ambiguous scope is a blocker, not permission to absorb other changes.
 
 Record HEAD and the complete scoped diff, including untracked file contents, before each review. Freeze these inputs while the reviewer runs. If any reviewed input changes, that approval is stale. Read [references/dispatch.md](references/dispatch.md) when starting a reviewer.
 
@@ -25,7 +25,7 @@ Use one fresh independent reviewer session per round. Send the goal, exclusions,
 - Findings with stable IDs, location, failure condition, impact and smallest proposed fix.
 - Outstanding uncertainty and checks it could not perform.
 
-Run at most three rounds total. The first reviews the full scoped change. Later rounds receive the complete current diff, prior finding dispositions and the changes since the last review; focus on open findings and changed behavior. Give the reviewer its own prior findings, not an author's claim that they are resolved.
+Run at most three rounds total. The first reviews the full scoped change. Later rounds receive the complete current diff, the reviewer's prior findings, the author's proposed dispositions and the changes since the last review. Label dispositions as the author's claims. The reviewer independently verifies them against current inputs and focuses on open findings and changed behavior.
 
 Verify each finding yourself. Fix confirmed bugs only within existing authorization. Prefer the smallest correct change and a focused regression check when useful. Refute mistaken findings with evidence. Record out-of-scope work without implementing it. Judge severity by impact and evidence; a rare security or data-loss path can still block. Cosmetic suggestions do not force another round.
 

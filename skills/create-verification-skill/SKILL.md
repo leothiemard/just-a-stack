@@ -1,6 +1,6 @@
 ---
 name: create-verification-skill
-description: Create or update a personal verify-app, verify-studio or verify-storybook skill usable across checkouts. Use when asked for a personal or cross-checkout verification skill. Project-local pstack verifiers use pstack:create-verification-skill when available. Ordinary verification uses an existing verifier.
+description: Create or update a personal verify-app, verify-studio or verify-storybook skill usable across checkouts. Use for personal or cross-checkout verification skills. Project-local verifiers use pstack:create-verification-skill when available; otherwise this skill handles them too. Ordinary verification uses an existing verifier.
 metadata:
   inspired-by: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/create-verification-skill/SKILL.md
   visual-parity: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/poteto-mode/playbooks/visual-parity.md
