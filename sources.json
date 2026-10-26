@@ -119,6 +119,63 @@
       ]
     }
   },
+  "tstack": {
+    "repository": "https://github.com/t3dotgg/tstack",
+    "audit_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+    "skills": [
+      "sol-loop",
+      "full-stop",
+      "full-send"
+    ],
+    "license": "licenses/tstack.LICENSE",
+    "note": "Adapt Theo's explicit Sol review and stop/send delivery entry points. Keep bounded review, observed proof and explicit merge authority. Preserve host/repository testing rules and required approval; do not downgrade rare high-impact failures. Inline the concise PR and CI guidance instead of adding helper skills or a watcher script.",
+    "update_tracking": {
+      "git_url": "https://github.com/t3dotgg/tstack.git",
+      "ref": "HEAD",
+      "items": [
+        {
+          "id": "sol-loop",
+          "path": "skills/sol-loop",
+          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "local_paths": [
+            "skills/sol-loop"
+          ]
+        },
+        {
+          "id": "full-stop",
+          "path": "skills/full-stop",
+          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "local_paths": [
+            "skills/full-stop"
+          ]
+        },
+        {
+          "id": "full-send",
+          "path": "skills/full-send",
+          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "local_paths": [
+            "skills/full-send"
+          ]
+        },
+        {
+          "id": "file-pr",
+          "path": "skills/file-pr",
+          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "local_paths": [
+            "skills/full-send"
+          ]
+        },
+        {
+          "id": "babysit-pr",
+          "path": "skills/babysit-pr",
+          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "local_paths": [
+            "skills/full-send"
+          ]
+        }
+      ]
+    }
+  },
   "sanity-agent-toolkit": {
     "repository": "https://github.com/sanity-io/agent-toolkit",
     "installed_on": "2026-05-18",

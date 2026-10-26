@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Stress-test an implementation plan or consequential design decision before coding. Use when asked to grill, challenge or refine a plan, or when unresolved decisions affect data preservation, rollout or implementation scope. Skip settled requirements, straightforward fixes and purely factual lookup requests.
+description: Use when asked to grill, challenge or stress-test an implementation plan before coding. Resolve consequential product and rollout decisions. Ordinary architecture work, straightforward fixes and factual lookup do not trigger this interview.
 metadata:
   inspired-by: https://github.com/mattpocock/skills/blob/49dd158d1076134a641b33efb035946536778336/skills/productivity/grilling/SKILL.md
 ---

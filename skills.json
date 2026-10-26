@@ -6,6 +6,8 @@
     "council",
     "create-verification-skill",
     "diagnosing-bugs",
+    "full-send",
+    "full-stop",
     "grilling",
     "handoff",
     "portable-text-conversion",
@@ -13,6 +15,7 @@
     "retro",
     "sanity-best-practices",
     "seo-aeo-best-practices",
+    "sol-loop",
     "tailwind-4-docs"
   ]
 }

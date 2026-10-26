@@ -1,6 +1,6 @@
-# Personal agent skills
+# just-a-stack
 
-Thirteen portable skills shared between two independent machines. Each machine keeps its own checkout, agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
+Sixteen portable personal skills shared between two independent machines. This is the curated personal part of the stack; pstack-t3, Impeccable and other plugins remain independently maintained. The repository and stable checkout are still named `agent-skills`, so existing links and the second machine keep working. Each machine keeps its own agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
 
 | Skill | Purpose |
 | --- | --- |
@@ -10,6 +10,9 @@ Thirteen portable skills shared between two independent machines. Each machine k
 | handoff | Transfer requirements, workspace state and evidence to another session or machine. |
 | grilling | Resolve consequential design decisions before implementation. |
 | retro | Turn observed workflow failures into a few focused improvements. |
+| sol-loop | Ask Sol for bounded review and fix confirmed issues. |
+| full-stop | Finish, prove, review and prepare a PR for the user to merge. |
+| full-send | The same workflow, with explicit authority to merge after checks and review. |
 | create-verification-skill | Build and exercise a reusable verifier against a real application. |
 | sanity-best-practices | Sanity schemas, queries, Studio and integrations. |
 | content-modeling-best-practices | Structured content architecture. |
@@ -17,6 +20,24 @@ Thirteen portable skills shared between two independent machines. Each machine k
 | portable-text-serialization | Render and export Portable Text. |
 | tailwind-4-docs | Tailwind v4 guidance with an optional local docs cache. |
 | seo-aeo-best-practices | Metadata, structured data and search visibility. |
+
+## Everyday workflow
+
+Ordinary requests stay ordinary. Use these explicit entry points when wanted:
+
+| Say | Result |
+| --- | --- |
+| "sol loop" | One Sol reviewer, small fixes and at most three rounds. |
+| "full stop" | Complete the change through a reviewed PR, then leave it unmerged. |
+| "full send" | Complete the same workflow and merge only after proof, review and required checks pass. |
+
+These are adaptations of Theo's tstack. They use the host's tools directly, without routing through poteto-mode or adding another watcher. Model unavailability and unresolved review stay blockers. Rare high-impact failures can block. Full send does not authorize production changes or bypass repository protections.
+
+pstack is an optional toolbox for an explicitly requested panel, arena or larger coordinated task. In T3, `session hook: off` in its saved model sheet removes automatic poteto-mode routing while keeping configured seats available. This is a per-machine preference, not something this installer changes. Council remains an explicit exact-commit gate; it is not an everyday review requirement.
+
+Knowledge skills still load by topic, including Impeccable for UI work. The personal blast-radius skill specializes in contracts and persisted data; the personal verifier specializes in reuse across checkouts. Use pstack's versions for general impact or project-local pstack verifiers when available. Personal skills cover those requests when pstack is absent. Grilling and retro remain request-driven. Handoff writes a transfer brief; pickup resumes one.
+
+Manual cases in [evals/routing.json](evals/routing.json), [evals/sol-loop.json](evals/sol-loop.json) and [evals/delivery.json](evals/delivery.json) record intended decisions. They do not establish better defect detection or prove live forge operations.
 
 ## Set up either machine
 
@@ -57,7 +78,7 @@ Each project remains a separate checkout on each machine. Give a task one active
 
 Tailwind documentation downloads are optional and remain local. See that skill for official-docs fallback and explicit cache initialization. No cache is downloaded by the installer.
 
-## Check Lauren's and Matt's upstream changes
+## Check borrowed upstream changes
 
 From this checkout on either machine:
 
@@ -65,7 +86,7 @@ From this checkout on either machine:
 python3 scripts/check_upstream.py
 ```
 
-The checker uses Git and Python's standard library to fetch public upstream content into temporary bare repositories. It compares ten selected scopes against their last-reviewed commits in `sources.json`, including skill resources, new files and borrowed references. It never checks out or runs upstream code, edits installed skills, or advances review baselines.
+The checker uses Git and Python's standard library to fetch public upstream content into temporary bare repositories. It compares selected scopes against their last-reviewed commits in `sources.json`, including skill resources, new files and borrowed references. It never checks out or runs upstream code, edits installed skills, or advances review baselines.
 
 Open the printed `report.md` path for a summary and links to full upstream patches. `report.json` contains the same results for agents. Reports stay in the ignored `.local/upstream/` directory. A missing or moved source is flagged; a failed fetch is reported as an error, with exit code 1, rather than being called current. Completed checks exit 0 even when changes need review.
 
@@ -76,7 +97,7 @@ python3 scripts/check_upstream.py --source pstack
 python3 scripts/check_upstream.py --source mattpocock --output /tmp/skills-upstream-review
 ```
 
-Existing output directories are never overwritten. The default check covers pstack and Matt Pocock only. The Sanity and Tailwind reference packages retain their original folder hashes; those are not verified Git commits and need separate baseline work before update tracking can be added.
+Existing output directories are never overwritten. The default check covers the mapped pstack, Matt Pocock and tstack scopes. The Sanity and Tailwind reference packages retain their original folder hashes; those are not verified Git commits and need separate baseline work before update tracking can be added.
 
 Compare each changed source with the mapped local adaptation and adopt useful parts selectively. When a scope has been fully assessed, update its `update_tracking.items[].reviewed_commit` to the captured upstream commit, including when you deliberately decline the change. Record the decision in the commit message, validate affected skills, then commit/push and pull on the other machine. Leave unreviewed scopes pinned. Keep the original `audit_commit` as historical provenance.
 
