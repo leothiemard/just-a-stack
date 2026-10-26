@@ -1,6 +1,6 @@
 # just-a-stack
 
-Sixteen portable personal skills shared between two independent machines. This is the curated personal part of the stack; pstack-t3, Impeccable and other plugins remain independently maintained. The repository and stable checkout are still named `agent-skills`, so existing links and the second machine keep working. Each machine keeps its own agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
+Sixteen portable personal skills shared between two independent machines. This is the curated personal part of the stack; pstack-t3, Impeccable and other plugins remain independently maintained. The GitHub repository and T3 project are named `just-a-stack`. Existing checkouts can keep their `agent-skills` folder name so installed links continue working. Each machine keeps its own agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
 
 | Skill | Purpose |
 | --- | --- |
@@ -44,8 +44,8 @@ Manual cases in [evals/routing.json](evals/routing.json), [evals/sol-loop.json](
 Requires Git and Python 3.10+. Authenticate Git with this repository's personal GitHub account through your normal credential flow, then:
 
 ```sh
-git clone https://github.com/leothiemard/agent-skills.git ~/Development/agent-skills
-cd ~/Development/agent-skills
+git clone https://github.com/leothiemard/just-a-stack.git ~/Development/just-a-stack
+cd ~/Development/just-a-stack
 python3 scripts/install.py
 python3 scripts/install.py --apply
 python3 scripts/install.py --check
@@ -62,6 +62,19 @@ python3 scripts/install.py --restore /path/printed/by/installer/manifest.json
 ```
 
 Restoration first verifies that its links have not been replaced. If you edited skill files through a symlink, those edits live in this checkout; restoring the previous folders does not discard the checkout.
+
+## Existing checkouts after the rename
+
+Run this inside each existing checkout on both machines:
+
+```sh
+git remote set-url origin https://github.com/leothiemard/just-a-stack.git
+git pull --ff-only
+python3 scripts/install.py --check
+python3 scripts/install.py --root ~/.claude/skills --check
+```
+
+Keep the checkout at its existing path. Installed skills point to that folder, so the repository rename needs no reinstall. A later folder move needs a separate link migration.
 
 ## Daily use on two machines
 
