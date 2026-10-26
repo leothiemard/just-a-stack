@@ -9,9 +9,9 @@
     {"id": 6, "prompt": "Grill this rollout plan before we implement it. Challenge the assumptions about preserving existing customer data.", "expected_output": "Personal grilling.", "files": []},
     {"id": 7, "prompt": "Write a paste-ready handoff with the current review findings for a fresh agent on my other machine.", "expected_output": "Personal handoff; do not launch another thread.", "files": []},
     {"id": 8, "prompt": "Resume the implementation from this existing handoff and verify the workspace before continuing.", "expected_output": "Session pickup, not writing another handoff.", "files": []},
-    {"id": 9, "prompt": "Run a sol loop on this change and fix confirmed bugs. Keep the changes small.", "expected_output": "Personal review-loop.", "files": []},
+    {"id": 9, "prompt": "Run a sol loop on this change and fix confirmed bugs. Keep the changes small.", "expected_output": "Personal sol-loop.", "files": []},
     {"id": 10, "prompt": "Consult the council on this pinned commit before I decide whether to merge it. Do not fix anything.", "expected_output": "Personal council; consult only.", "files": []},
-    {"id": 11, "prompt": "Interrogate this branch with the configured multi-model panel.", "expected_output": "pstack:interrogate, not review-loop.", "files": []},
+    {"id": 11, "prompt": "Interrogate this branch with the configured multi-model panel.", "expected_output": "pstack:interrogate, not sol-loop.", "files": []},
     {"id": 12, "prompt": "Explain how Portable Text serialization works in this React frontend.", "expected_output": "Portable Text knowledge workflow; no review loop or grilling.", "files": []}
   ]
 }

@@ -1,6 +1,6 @@
 # just-a-stack
 
-Fourteen portable personal skills shared between two independent machines. This is the curated personal part of the stack; pstack-t3, Impeccable and other plugins remain independently maintained. The repository and stable checkout are still named `agent-skills`, so existing links and the second machine keep working. Each machine keeps its own agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
+Sixteen portable personal skills shared between two independent machines. This is the curated personal part of the stack; pstack-t3, Impeccable and other plugins remain independently maintained. The repository and stable checkout are still named `agent-skills`, so existing links and the second machine keep working. Each machine keeps its own agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
 
 | Skill | Purpose |
 | --- | --- |
@@ -10,7 +10,9 @@ Fourteen portable personal skills shared between two independent machines. This 
 | handoff | Transfer requirements, workspace state and evidence to another session or machine. |
 | grilling | Resolve consequential design decisions before implementation. |
 | retro | Turn observed workflow failures into a few focused improvements. |
-| review-loop | Trial an explicit, bounded review-and-fix loop with one independent reviewer. |
+| sol-loop | Ask Sol for bounded review and fix confirmed issues. |
+| full-stop | Finish, prove, review and prepare a PR for the user to merge. |
+| full-send | The same workflow, with explicit authority to merge after checks and review. |
 | create-verification-skill | Build and exercise a reusable verifier against a real application. |
 | sanity-best-practices | Sanity schemas, queries, Studio and integrations. |
 | content-modeling-best-practices | Structured content architecture. |
@@ -19,34 +21,23 @@ Fourteen portable personal skills shared between two independent machines. This 
 | tailwind-4-docs | Tailwind v4 guidance with an optional local docs cache. |
 | seo-aeo-best-practices | Metadata, structured data and search visibility. |
 
-## Choose the owner workflow
+## Everyday workflow
 
-Descriptions select the workflow. Explicit skill names take precedence. When both this collection and pstack are available, use these boundaries:
+Ordinary requests stay ordinary. Use these explicit entry points when wanted:
 
-| Request | Owner |
+| Say | Result |
 | --- | --- |
-| Schema/GROQ rename, stored-data compatibility, serialized contract or deployment-order risk | Personal `blast-radius` |
-| General impact of a change elsewhere in a codebase | `pstack:blast-radius` |
-| Personal verifier reusable across checkouts or machines | Personal `create-verification-skill` |
-| Project-local pstack verifier | `pstack:create-verification-skill` |
-| Explicit review loop with fixes and a three-round budget | Personal `review-loop` |
-| Read-only review | The requested review workflow; a review-loop request stays read-only when specified |
-| Unanimous approval of an exact commit before an action | Personal `council` |
-| Broad adversarial multi-model review | `pstack:interrogate` |
-| Write a transfer brief | Personal `handoff` |
-| Resume existing work from a transfer brief | The active session-pickup workflow |
+| "sol loop" | One Sol reviewer, small fixes and at most three rounds. |
+| "full stop" | Complete the change through a reviewed PR, then leave it unmerged. |
+| "full send" | Complete the same workflow and merge only after proof, review and required checks pass. |
 
-`grilling` starts an interview when asked to challenge a plan. It does not intercept ordinary architecture work. `retro` remains request-only. Knowledge skills still load by topic. Council's commit-pinning guarantees remain intact.
+These are adaptations of Theo's tstack. They use the host's tools directly, without routing through poteto-mode or adding another watcher. Model unavailability and unresolved review stay blockers. Rare high-impact failures can block. Full send does not authorize production changes or bypass repository protections.
 
-These boundaries clarify intended routing without uninstalling plugin resources that other workflows call. The scenario set in [evals/routing.json](evals/routing.json) records expected choices for checking real harness behavior. Folder names do not establish harness compatibility.
+pstack is an optional toolbox for an explicitly requested panel, arena or larger coordinated task. In T3, `session hook: off` in its saved model sheet removes automatic poteto-mode routing while keeping configured seats available. This is a per-machine preference, not something this installer changes. Council remains an explicit exact-commit gate; it is not an everyday review requirement.
 
-Without pstack installed, the personal blast-radius and verifier skills also cover general impact reviews and requested project-local verifiers.
+Knowledge skills still load by topic, including Impeccable for UI work. The personal blast-radius skill specializes in contracts and persisted data; the personal verifier specializes in reuse across checkouts. Use pstack's versions for general impact or project-local pstack verifiers when available. Personal skills cover those requests when pstack is absent. Grilling and retro remain request-driven. Handoff writes a transfer brief; pickup resumes one.
 
-## Review-loop trial
-
-Invoke with "review loop this change" or "sol loop this change". It uses the requested reviewer, otherwise an available Sol model, and stops after at most three rounds. It preserves read-only requests and reports rejected findings, missing reviewers and unresolved objections honestly. It does not start babysitting or grant merge authority.
-
-This is an opt-in trial, not a replacement for interrogate or council. [evals/review-loop.json](evals/review-loop.json) covers ordinary fixes, rare high-impact bugs, stale approval and budget exhaustion. A scenario pass does not establish better defect detection on real PRs.
+Manual cases in [evals/routing.json](evals/routing.json), [evals/sol-loop.json](evals/sol-loop.json) and [evals/delivery.json](evals/delivery.json) record intended decisions. They do not establish better defect detection or prove live forge operations.
 
 ## Set up either machine
 
@@ -95,7 +86,7 @@ From this checkout on either machine:
 python3 scripts/check_upstream.py
 ```
 
-The checker uses Git and Python's standard library to fetch public upstream content into temporary bare repositories. It compares ten selected scopes against their last-reviewed commits in `sources.json`, including skill resources, new files and borrowed references. It never checks out or runs upstream code, edits installed skills, or advances review baselines.
+The checker uses Git and Python's standard library to fetch public upstream content into temporary bare repositories. It compares selected scopes against their last-reviewed commits in `sources.json`, including skill resources, new files and borrowed references. It never checks out or runs upstream code, edits installed skills, or advances review baselines.
 
 Open the printed `report.md` path for a summary and links to full upstream patches. `report.json` contains the same results for agents. Reports stay in the ignored `.local/upstream/` directory. A missing or moved source is flagged; a failed fetch is reported as an error, with exit code 1, rather than being called current. Completed checks exit 0 even when changes need review.
 
