@@ -1,6 +1,6 @@
-# Personal agent skills
+# just-a-stack
 
-Thirteen portable skills shared between two independent machines. Each machine keeps its own checkout, agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
+Fourteen portable personal skills shared between two independent machines. This is the curated personal part of the stack; pstack-t3, Impeccable and other plugins remain independently maintained. The repository and stable checkout are still named `agent-skills`, so existing links and the second machine keep working. Each machine keeps its own agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
 
 | Skill | Purpose |
 | --- | --- |
@@ -10,6 +10,7 @@ Thirteen portable skills shared between two independent machines. Each machine k
 | handoff | Transfer requirements, workspace state and evidence to another session or machine. |
 | grilling | Resolve consequential design decisions before implementation. |
 | retro | Turn observed workflow failures into a few focused improvements. |
+| review-loop | Trial an explicit, bounded review-and-fix loop with one independent reviewer. |
 | create-verification-skill | Build and exercise a reusable verifier against a real application. |
 | sanity-best-practices | Sanity schemas, queries, Studio and integrations. |
 | content-modeling-best-practices | Structured content architecture. |
@@ -17,6 +18,33 @@ Thirteen portable skills shared between two independent machines. Each machine k
 | portable-text-serialization | Render and export Portable Text. |
 | tailwind-4-docs | Tailwind v4 guidance with an optional local docs cache. |
 | seo-aeo-best-practices | Metadata, structured data and search visibility. |
+
+## Choose the owner workflow
+
+Descriptions select the workflow. Explicit skill names take precedence. When both this collection and pstack are available, use these boundaries:
+
+| Request | Owner |
+| --- | --- |
+| Schema/GROQ rename, stored-data compatibility, serialized contract or deployment-order risk | Personal `blast-radius` |
+| General impact of a change elsewhere in a codebase | `pstack:blast-radius` |
+| Personal verifier reusable across checkouts or machines | Personal `create-verification-skill` |
+| Project-local pstack verifier | `pstack:create-verification-skill` |
+| Explicit review loop with fixes and a three-round budget | Personal `review-loop` |
+| Read-only review | The requested review workflow; a review-loop request stays read-only when specified |
+| Unanimous approval of an exact commit before an action | Personal `council` |
+| Broad adversarial multi-model review | `pstack:interrogate` |
+| Write a transfer brief | Personal `handoff` |
+| Resume existing work from a transfer brief | The active session-pickup workflow |
+
+`grilling` starts an interview when asked to challenge a plan. It does not intercept ordinary architecture work. `retro` remains request-only. Knowledge skills still load by topic. Council's commit-pinning guarantees remain intact.
+
+These boundaries clarify intended routing without uninstalling plugin resources that other workflows call. The scenario set in [evals/routing.json](evals/routing.json) records expected choices for checking real harness behavior. Folder names do not establish harness compatibility.
+
+## Review-loop trial
+
+Invoke with "review loop this change" or "sol loop this change". It uses the requested reviewer, otherwise an available Sol model, and stops after at most three rounds. It preserves read-only requests and reports rejected findings, missing reviewers and unresolved objections honestly. It does not start babysitting or grant merge authority.
+
+This is an opt-in trial, not a replacement for interrogate or council. [evals/review-loop.json](evals/review-loop.json) covers ordinary fixes, rare high-impact bugs, stale approval and budget exhaustion. A scenario pass does not establish better defect detection on real PRs.
 
 ## Set up either machine
 
@@ -57,7 +85,7 @@ Each project remains a separate checkout on each machine. Give a task one active
 
 Tailwind documentation downloads are optional and remain local. See that skill for official-docs fallback and explicit cache initialization. No cache is downloaded by the installer.
 
-## Check Lauren's and Matt's upstream changes
+## Check borrowed upstream changes
 
 From this checkout on either machine:
 
@@ -76,7 +104,7 @@ python3 scripts/check_upstream.py --source pstack
 python3 scripts/check_upstream.py --source mattpocock --output /tmp/skills-upstream-review
 ```
 
-Existing output directories are never overwritten. The default check covers pstack and Matt Pocock only. The Sanity and Tailwind reference packages retain their original folder hashes; those are not verified Git commits and need separate baseline work before update tracking can be added.
+Existing output directories are never overwritten. The default check covers the mapped pstack, Matt Pocock and tstack scopes. The Sanity and Tailwind reference packages retain their original folder hashes; those are not verified Git commits and need separate baseline work before update tracking can be added.
 
 Compare each changed source with the mapped local adaptation and adopt useful parts selectively. When a scope has been fully assessed, update its `update_tracking.items[].reviewed_commit` to the captured upstream commit, including when you deliberately decline the change. Record the decision in the commit message, validate affected skills, then commit/push and pull on the other machine. Leave unreviewed scopes pinned. Keep the original `audit_commit` as historical provenance.
 

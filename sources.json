@@ -119,6 +119,25 @@
       ]
     }
   },
+  "tstack": {
+    "repository": "https://github.com/t3dotgg/tstack",
+    "audit_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+    "skills": ["review-loop"],
+    "license": "licenses/tstack.LICENSE",
+    "note": "Adapted sol-loop's three-round budget, one-reviewer rule, findings ledger and honest verdict reporting. Declined automatic delivery, fixed severity downgrades for rare cases and the five-round exception. This is an explicit trial; council remains the exact-commit gate.",
+    "update_tracking": {
+      "git_url": "https://github.com/t3dotgg/tstack.git",
+      "ref": "HEAD",
+      "items": [
+        {
+          "id": "sol-loop",
+          "path": "skills/sol-loop",
+          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "local_paths": ["skills/review-loop"]
+        }
+      ]
+    }
+  },
   "sanity-agent-toolkit": {
     "repository": "https://github.com/sanity-io/agent-toolkit",
     "installed_on": "2026-05-18",

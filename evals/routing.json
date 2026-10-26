@@ -1,0 +1,17 @@
+{
+  "skill_name": "personal-workflow-routing",
+  "evals": [
+    {"id": 1, "prompt": "Rename a Sanity field without breaking existing published documents or GROQ consumers. Check the contract blast radius first.", "expected_output": "Personal blast-radius.", "files": []},
+    {"id": 2, "prompt": "Run pstack:blast-radius on this shared utility refactor to find downstream callers we missed.", "expected_output": "pstack:blast-radius; honor the explicit selection.", "files": []},
+    {"id": 3, "prompt": "Create a personal verify-studio skill I can use from any checkout on either machine.", "expected_output": "Personal create-verification-skill.", "files": []},
+    {"id": 4, "prompt": "Use pstack:create-verification-skill to create this project's local verify skill.", "expected_output": "pstack:create-verification-skill.", "files": []},
+    {"id": 5, "prompt": "Design the module boundaries for this feature. Requirements are settled; do not interview me again.", "expected_output": "The architecture workflow, not grilling.", "files": []},
+    {"id": 6, "prompt": "Grill this rollout plan before we implement it. Challenge the assumptions about preserving existing customer data.", "expected_output": "Personal grilling.", "files": []},
+    {"id": 7, "prompt": "Write a paste-ready handoff with the current review findings for a fresh agent on my other machine.", "expected_output": "Personal handoff; do not launch another thread.", "files": []},
+    {"id": 8, "prompt": "Resume the implementation from this existing handoff and verify the workspace before continuing.", "expected_output": "Session pickup, not writing another handoff.", "files": []},
+    {"id": 9, "prompt": "Run a sol loop on this change and fix confirmed bugs. Keep the changes small.", "expected_output": "Personal review-loop.", "files": []},
+    {"id": 10, "prompt": "Consult the council on this pinned commit before I decide whether to merge it. Do not fix anything.", "expected_output": "Personal council; consult only.", "files": []},
+    {"id": 11, "prompt": "Interrogate this branch with the configured multi-model panel.", "expected_output": "pstack:interrogate, not review-loop.", "files": []},
+    {"id": 12, "prompt": "Explain how Portable Text serialization works in this React frontend.", "expected_output": "Portable Text knowledge workflow; no review loop or grilling.", "files": []}
+  ]
+}

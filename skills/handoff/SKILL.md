@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Produce a concise paste-ready handoff for another agent or session. Use when asked to write a fix prompt, hand over review findings, resume work elsewhere, or transfer implementation context; creating a handoff does not itself start another thread.
+description: Use when asked to write a handoff, fix prompt or transfer brief for another agent, session or machine. Return a concise paste-ready brief. Resuming an existing handoff belongs to the active pickup workflow; writing one does not start another thread.
 metadata:
   inspired-by: https://github.com/mattpocock/skills/blob/49dd158d1076134a641b33efb035946536778336/skills/productivity/handoff/SKILL.md
 ---

@@ -1,6 +1,6 @@
 ---
 name: create-verification-skill
-description: Create or update a reusable verify-app, verify-studio or verify-storybook skill grounded in an actual repository and exercised through its real UI, CLI or service. Use when asked to create a verification/control skill or codify repeated app verification. Ordinary screenshot requests use an existing verifier instead of generating a skill.
+description: Create or update a personal verify-app, verify-studio or verify-storybook skill usable across checkouts. Use when asked for a personal or cross-checkout verification skill. Project-local pstack verifiers use pstack:create-verification-skill when available. Ordinary verification uses an existing verifier.
 metadata:
   inspired-by: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/create-verification-skill/SKILL.md
   visual-parity: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/poteto-mode/playbooks/visual-parity.md
@@ -16,7 +16,7 @@ Read applicable instructions, historical notes supplied by the user or project c
 
 - **Surface:** web UI, Studio, Storybook, CLI, service or another user-facing interface; choose the requested surface.
 - **Launch:** exact documented command, working directory, readiness check, ports, auth and data preconditions.
-- **Drive:** existing Playwright/Cypress, browser, PTY or HTTP harness. Prefer available T3 preview tools for supported browser interaction; inspect a snapshot before acting and use stable semantic selectors. Respect tab ownership and user-controlled sessions.
+- **Drive:** existing Playwright/Cypress, browser, PTY or HTTP harness. Follow the active host's browser policy; a tool's availability does not authorize its use for verification. Inspect a snapshot before acting and use stable semantic selectors. Respect tab ownership and user-controlled sessions.
 - **Observe:** before/action/after evidence, user-visible results and relevant side effects.
 - **Isolate:** owned process IDs, port ownership, unique fixture IDs and safe concurrent-instance boundaries.
 

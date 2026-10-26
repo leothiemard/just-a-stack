@@ -1,6 +1,6 @@
 ---
 name: blast-radius
-description: Assess what a change could break beyond its diff. Use for blast-radius requests, contract changes, shared schema or GROQ field renames, migration compatibility, and reviews where persisted data or downstream consumers make a small diff risky. Skip purely cosmetic and isolated changes.
+description: Check persisted-data and contract compatibility for schema or GROQ renames, migrations, serialized APIs and deployment order. Use for contract blast-radius requests. General downstream-impact reviews use pstack:blast-radius when available. Skip cosmetic and isolated changes.
 metadata:
   inspired-by: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/blast-radius/SKILL.md
 ---
