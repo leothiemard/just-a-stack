@@ -1,19 +1,23 @@
 # just-a-stack
 
-Sixteen portable personal skills shared between two independent machines. This is the curated personal part of the stack; pstack-t3, Impeccable and other plugins remain independently maintained. The GitHub repository and T3 project are named `just-a-stack`. Existing checkouts can keep their `agent-skills` folder name so installed links continue working. Each machine keeps its own agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
+Twenty portable skills shared between two independent machines. Borrowed workflows follow their upstream sources, with small documented compatibility patches. pstack-t3, Impeccable and other plugins remain independently maintained. The GitHub repository and T3 project are named `just-a-stack`. Existing checkouts can keep their `agent-skills` folder name so installed links continue working. Each machine keeps its own agents, credentials and project configuration. Company-specific workflows live separately on the work machine.
 
 | Skill | Purpose |
 | --- | --- |
-| diagnosing-bugs | Reproduce, test explanations and verify a focused fix; includes performance measurement guidance. |
+| diagnosing-bugs | Build a red-capable feedback loop, reproduce and minimize, then diagnose and fix. |
 | blast-radius | Trace contract and downstream risks beyond a diff. |
-| council | Gate a PR merge or an action on a commit on unanimous review by Opus 5.5 and GPT-6.1 Sol. |
-| handoff | Transfer requirements, workspace state and evidence to another session or machine. |
-| grilling | Resolve consequential design decisions before implementation. |
-| retro | Turn observed workflow failures into a few focused improvements. |
+| council | Get review or feedback from three providers, with scored code reviews and further rounds as needed. |
+| handoff | Save a concise conversation handoff in the OS temporary directory. |
+| grilling | Explore the complete decision tree with the user before acting. |
+| retro | Recommend improvements to the coding environment from a session retrospective. |
 | sol-loop | Ask Sol for bounded review and fix confirmed issues. |
 | full-stop | Finish, prove, review and prepare a PR for the user to merge. |
 | full-send | The same workflow, with explicit authority to merge after checks and review. |
-| create-verification-skill | Build and exercise a reusable verifier against a real application. |
+| file-pr | Open a concise PR describing the problem, solution and proof. |
+| babysit-pr | Follow review and CI with the host watcher or the bundled non-T3 watcher. |
+| leaving-pr-comments | Attribute agent-authored GitHub comments and verify the posted result. |
+| writing-for-agents | Write skills and instructions using Matt's full guide and mechanics reference. |
+| create-verification-skill | Generate and exercise a project-local verifier and feature map. |
 | sanity-best-practices | Sanity schemas, queries, Studio and integrations. |
 | content-modeling-best-practices | Structured content architecture. |
 | portable-text-conversion | Import HTML and Markdown into Portable Text. |
@@ -27,17 +31,18 @@ Ordinary requests stay ordinary. Use these explicit entry points when wanted:
 
 | Say | Result |
 | --- | --- |
-| "sol loop" | One Sol reviewer, small fixes and at most three rounds. |
+| "sol loop" | One Sol reviewer; three rounds by default, up to five for the upstream high-risk cases or at the user's request. |
 | "full stop" | Complete the change through a reviewed PR, then leave it unmerged. |
 | "full send" | Complete the same workflow and merge only after proof, review and required checks pass. |
+| "council" | Three providers review the request; collect findings, disagreements and code-review scores. |
 
-These are adaptations of Theo's tstack. They use the host's tools directly, without routing through poteto-mode or adding another watcher. Model unavailability and unresolved review stay blockers. Rare high-impact failures can block. Full send does not authorize production changes or bypass repository protections.
+Theo's workflows and their PR/comment helpers are preserved from tstack, including their review budgets, severity policy and task-scoped testing permission. Full send and full stop authorize needed test methods even when a project normally asks first; higher-priority host/system constraints still apply. Production changes and data deletion remain outside that grant. Council uses Theo's three-provider feedback workflow; the former custom exact-commit gate and snapshot tooling have been removed.
 
-pstack is an optional toolbox for an explicitly requested panel, arena or larger coordinated task. In T3, `session hook: off` in its saved model sheet removes automatic poteto-mode routing while keeping configured seats available. This is a per-machine preference, not something this installer changes. Council remains an explicit exact-commit gate; it is not an everyday review requirement.
+pstack remains independently installed. Lauren's blast-radius workflow calls its `how`, `why`, `arena` and `unslop` companions, and her verifier generator offers its maintenance skill. Those calls use the `pstack:` prefix here. Install pstack when using those companion workflows. In T3, `session hook: off` in its saved model sheet keeps automatic poteto-mode routing off; this per-machine preference is not changed by the installer.
 
-Knowledge skills still load by topic, including Impeccable for UI work. The personal blast-radius skill specializes in contracts and persisted data; the personal verifier specializes in reuse across checkouts. Use pstack's versions for general impact or project-local pstack verifiers when available. Personal skills cover those requests when pstack is absent. Grilling and retro remain request-driven. Handoff writes a transfer brief; pickup resumes one.
+Knowledge skills still load by topic, including Impeccable for UI work. Blast-radius again covers general downstream impact. The verifier generator writes a project-local skill for the active harness. Matt's debugging, grilling, handoff and retrospective workflows retain their original gates, output contracts and references. No separate custom variants are retained.
 
-Manual cases in [evals/routing.json](evals/routing.json), [evals/sol-loop.json](evals/sol-loop.json) and [evals/delivery.json](evals/delivery.json) record intended decisions. They do not establish better defect detection or prove live forge operations.
+Manual cases in [evals/routing.json](evals/routing.json), [evals/sol-loop.json](evals/sol-loop.json), [evals/delivery.json](evals/delivery.json) and [evals/council.json](evals/council.json) record intended decisions. They do not establish better defect detection or prove live forge operations. [UPSTREAM.md](UPSTREAM.md) records the restoration decisions and the complete remaining compatibility patches.
 
 ## Set up either machine
 
@@ -120,4 +125,4 @@ This checks net changes within the mapped scopes, not every new skill or change 
 
 Run `python3 -m unittest discover -s tests -v` after changing scripts. Validate edited skills with the active harness's skill validator and check their reference links. Keep this repository portable: no employer code, issue history, internal URLs, account configuration, credentials or generated documentation snapshots.
 
-See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [sources.json](sources.json) for origins and adaptation details.
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), [sources.json](sources.json) and [UPSTREAM.md](UPSTREAM.md) for origins, pins and compatibility patches.

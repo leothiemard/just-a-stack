@@ -1,10 +1,35 @@
 {
   "skill_name": "explicit-delivery",
   "evals": [
-    {"id": 1, "prompt": "Fix this typo in the README. The user did not say full send or full stop. What workflow and authority apply?", "expected_output": "Make the ordinary scoped fix. Do not activate autonomous delivery, panels or merge authority merely because multiple files might change.", "files": []},
-    {"id": 2, "prompt": "Full stop this fix. An existing PR is queued and auto-merge is enabled. What happens before changes, pushes and handoff?", "expected_output": "Disarm and verify both settings for the requested PR, then implement/prove/Sol-review and prepare the PR. Recheck state; leave it open and unmerged.", "files": []},
-    {"id": 3, "prompt": "During full stop, someone re-enables auto-merge after you verified it off. What happens?", "expected_output": "Stop mutations and ask. Do not silently reverse another actor or claim control over external merges.", "files": []},
-    {"id": 4, "prompt": "Full send this fix. Sol exhausted its budget with a concrete unresolved data-loss concern, but tests are green. Can you merge?", "expected_output": "No. Report unresolved review and the blocker. Neither green tests nor full-send authority replaces the review gate.", "files": []},
-    {"id": 5, "prompt": "Full stop a new change with no branch or PR yet. Does the lack of a PR block the first push?", "expected_output": "Confirm no PR exists, work on a task branch, publish within scope and apply no-merge checks when the PR exists. Absence of a PR is not an unknown setting on an existing PR.", "files": []}
+    {
+      "id": 1,
+      "prompt": "Fix this typo in the README. The user did not say full send or full stop. What workflow and authority apply?",
+      "expected_output": "Make the ordinary scoped fix. Do not activate autonomous delivery, panels or merge authority merely because multiple files might change.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Full stop this fix. An existing PR is queued and auto-merge is enabled. What happens before changes, pushes and handoff?",
+      "expected_output": "Disarm and verify both settings for the requested PR, then implement/prove/Sol-review and prepare the PR. Recheck state; leave it open and unmerged.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Full stop this fix. A project instruction asks for permission before browser testing. The host permits browser testing and no system approval is required. Is separate permission needed?",
+      "expected_output": "No. The explicit full-stop request grants the task-needed testing permission under the upstream full-send proof rules. Follow method-specific rules and higher-priority host/system constraints; keep the PR unmerged.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Full send this fix. Sol has reached its applicable review limit with a verified blocking bug in the intended case. Tests are green. Can you merge?",
+      "expected_output": "No. Budget exhaustion is not approval. Report the unresolved finding and evidence; green tests and full-send authority do not replace the review gate.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Babysit this PR outside T3. The host has no built-in PR watcher. What continuation mechanism is supplied?",
+      "expected_output": "Use the restored babysit-pr/scripts/pr-wait helper with the appropriate until condition; use a single watcher, handle actual findings and recheck live merge state. Do not invent another polling loop.",
+      "files": []
+    }
   ]
 }

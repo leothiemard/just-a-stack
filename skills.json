@@ -1,21 +1,25 @@
 {
   "version": 1,
   "skills": [
+    "babysit-pr",
     "blast-radius",
     "content-modeling-best-practices",
     "council",
     "create-verification-skill",
     "diagnosing-bugs",
+    "file-pr",
     "full-send",
     "full-stop",
     "grilling",
     "handoff",
+    "leaving-pr-comments",
     "portable-text-conversion",
     "portable-text-serialization",
     "retro",
     "sanity-best-practices",
     "seo-aeo-best-practices",
     "sol-loop",
-    "tailwind-4-docs"
+    "tailwind-4-docs",
+    "writing-for-agents"
   ]
 }

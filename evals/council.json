@@ -1,0 +1,23 @@
+{
+  "skill_name": "council",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Council this design proposal before we write code. Do not implement anything.",
+      "expected_output": "Dispatch three strong models from three providers at high effort, unless the user named members. Review the proposal directly, keep work read-only and summarize useful findings and disagreements. No commit or exact-SHA gate is needed.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Council this code change. The named third provider cannot run. Can you replace it with a second seat from one of the other providers?",
+      "expected_output": "Report the unavailable named member/provider instead of substituting. Do not call a two-provider panel the requested council.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "The council has completed two code-review passes for an open PR, and one reviewer omitted its score. Where do the results go?",
+      "expected_output": "Update the PR description with the round count and a per-delegate, per-round score table before the model/harness line. Use no score for the missing value, do not invent it and do not add a comment just for this report.",
+      "files": []
+    }
+  ]
+}

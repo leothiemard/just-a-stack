@@ -7,9 +7,7 @@
       "blast-radius",
       "create-verification-skill"
     ],
-    "references": [
-      "diagnosing-bugs: premise check and performance checklist"
-    ],
+    "references": [],
     "license": "licenses/pstack.LICENSE",
     "update_tracking": {
       "git_url": "https://github.com/cursor/plugins.git",
@@ -18,45 +16,25 @@
         {
           "id": "blast-radius",
           "path": "pstack/skills/blast-radius",
-          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
+          "reviewed_commit": "519d36aa98955bf680db01bcde5fdfba686dc901",
           "local_paths": [
             "skills/blast-radius"
-          ]
+          ],
+          "compatibility_patch": "patches/pstack-blast-radius.patch"
         },
         {
           "id": "create-verification-skill",
           "path": "pstack/skills/create-verification-skill",
-          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
+          "reviewed_commit": "519d36aa98955bf680db01bcde5fdfba686dc901",
           "local_paths": [
             "skills/create-verification-skill"
-          ]
-        },
-        {
-          "id": "visual-parity",
-          "path": "pstack/skills/poteto-mode/playbooks/visual-parity.md",
-          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
-          "local_paths": [
-            "skills/create-verification-skill"
-          ]
-        },
-        {
-          "id": "attack-the-premise",
-          "path": "pstack/skills/principle-attack-the-premise",
-          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
-          "local_paths": [
-            "skills/diagnosing-bugs/SKILL.md"
-          ]
-        },
-        {
-          "id": "benchmark-checklist",
-          "path": "pstack/skills/benchmark-checklist",
-          "reviewed_commit": "8b3326d99fd4b993cb33a24dad8af03175c642c5",
-          "local_paths": [
-            "skills/diagnosing-bugs/references/benchmark-checklist.md"
-          ]
+          ],
+          "compatibility_patch": "patches/pstack-create-verification-skill.patch"
         }
       ]
-    }
+    },
+    "adopted_commit": "519d36aa98955bf680db01bcde5fdfba686dc901",
+    "note": "Restored upstream workflows and bundled resources after the 2026-10-27 divergence audit. Preserve author behavior; local compatibility patches are documented in UPSTREAM.md."
   },
   "mattpocock": {
     "repository": "https://github.com/mattpocock/skills",
@@ -66,10 +44,11 @@
       "diagnosing-bugs",
       "grilling",
       "handoff",
-      "retro"
+      "retro",
+      "writing-for-agents"
     ],
     "references": [
-      "retro: writing-for-agents"
+      "writing-for-agents includes SKILL-MECHANICS.md"
     ],
     "license": "licenses/mattpocock.LICENSE",
     "update_tracking": {
@@ -79,7 +58,7 @@
         {
           "id": "diagnosing-bugs",
           "path": "skills/engineering/diagnosing-bugs",
-          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "reviewed_commit": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
           "local_paths": [
             "skills/diagnosing-bugs"
           ]
@@ -87,7 +66,7 @@
         {
           "id": "grilling",
           "path": "skills/productivity/grilling",
-          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "reviewed_commit": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
           "local_paths": [
             "skills/grilling"
           ]
@@ -95,7 +74,7 @@
         {
           "id": "handoff",
           "path": "skills/productivity/handoff",
-          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "reviewed_commit": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
           "local_paths": [
             "skills/handoff"
           ]
@@ -103,40 +82,54 @@
         {
           "id": "retro",
           "path": "skills/engineering/retro",
-          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "reviewed_commit": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
           "local_paths": [
-            "skills/retro/SKILL.md"
+            "skills/retro"
           ]
         },
         {
           "id": "writing-for-agents",
           "path": "skills/productivity/writing-for-agents",
-          "reviewed_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+          "reviewed_commit": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
           "local_paths": [
-            "skills/retro/references/writing-for-agents.md"
+            "skills/writing-for-agents"
           ]
         }
       ]
-    }
+    },
+    "adopted_commit": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
+    "note": "Restored upstream workflows and bundled resources after the 2026-10-27 divergence audit. Preserve author behavior; local compatibility patches are documented in UPSTREAM.md."
   },
   "tstack": {
     "repository": "https://github.com/t3dotgg/tstack",
     "audit_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
     "skills": [
+      "council",
       "sol-loop",
       "full-stop",
-      "full-send"
+      "full-send",
+      "file-pr",
+      "babysit-pr",
+      "leaving-pr-comments"
     ],
     "license": "licenses/tstack.LICENSE",
-    "note": "Adapt Theo's explicit Sol review and stop/send delivery entry points. Keep bounded review, observed proof and explicit merge authority. Preserve host/repository testing rules and required approval; do not downgrade rare high-impact failures. Inline the concise PR and CI guidance instead of adding helper skills or a watcher script.",
+    "note": "Restored upstream workflows and bundled resources after the 2026-10-27 divergence audit. Preserve author behavior; local compatibility patches are documented in UPSTREAM.md.",
     "update_tracking": {
       "git_url": "https://github.com/t3dotgg/tstack.git",
       "ref": "HEAD",
       "items": [
         {
+          "id": "council",
+          "path": "skills/council",
+          "reviewed_commit": "92e38e2cf677a84a142e8df296861c588542135c",
+          "local_paths": [
+            "skills/council"
+          ]
+        },
+        {
           "id": "sol-loop",
           "path": "skills/sol-loop",
-          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "reviewed_commit": "92e38e2cf677a84a142e8df296861c588542135c",
           "local_paths": [
             "skills/sol-loop"
           ]
@@ -144,7 +137,7 @@
         {
           "id": "full-stop",
           "path": "skills/full-stop",
-          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "reviewed_commit": "92e38e2cf677a84a142e8df296861c588542135c",
           "local_paths": [
             "skills/full-stop"
           ]
@@ -152,7 +145,7 @@
         {
           "id": "full-send",
           "path": "skills/full-send",
-          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "reviewed_commit": "92e38e2cf677a84a142e8df296861c588542135c",
           "local_paths": [
             "skills/full-send"
           ]
@@ -160,21 +153,31 @@
         {
           "id": "file-pr",
           "path": "skills/file-pr",
-          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "reviewed_commit": "92e38e2cf677a84a142e8df296861c588542135c",
           "local_paths": [
-            "skills/full-send"
+            "skills/file-pr"
           ]
         },
         {
           "id": "babysit-pr",
           "path": "skills/babysit-pr",
-          "reviewed_commit": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+          "reviewed_commit": "92e38e2cf677a84a142e8df296861c588542135c",
           "local_paths": [
-            "skills/full-send"
+            "skills/babysit-pr"
+          ]
+        },
+        {
+          "id": "leaving-pr-comments",
+          "path": "skills/leaving-pr-comments",
+          "reviewed_commit": "92e38e2cf677a84a142e8df296861c588542135c",
+          "local_paths": [
+            "skills/leaving-pr-comments"
           ]
         }
       ]
-    }
+    },
+    "adopted_commit": "92e38e2cf677a84a142e8df296861c588542135c",
+    "references": []
   },
   "sanity-agent-toolkit": {
     "repository": "https://github.com/sanity-io/agent-toolkit",
