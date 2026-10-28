@@ -1,26 +1,30 @@
 ---
 name: grilling
-description: Use when asked to grill, challenge or stress-test an implementation plan before coding. Resolve consequential product and rollout decisions. Ordinary architecture work, straightforward fixes and factual lookup do not trigger this interview.
-metadata:
-  inspired-by: https://github.com/mattpocock/skills/blob/49dd158d1076134a641b33efb035946536778336/skills/productivity/grilling/SKILL.md
+description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
 ---
 
-# Grilling
+Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
-Reach a small set of explicit consequential decisions, not an exhaustive questionnaire.
+Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
 
-Read the supplied requirements/comments, notes identified by the user or project conventions, applicable instructions, current code and existing patterns. Finding facts is the agent's job. Ask the user only for decisions or inaccessible information that changes the implementation, could lose data or alters rollout.
+Format a round like so:
 
-Map dependencies between unresolved decisions. Ask only questions whose prerequisites are settled, at most three in a round. For each:
+```
+❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
 
-- **Decision:** precise question and the requirement it affects.
-- **Recommendation:** default answer first, with one sentence of evidence and tradeoff.
-- **Alternative:** include only a materially different viable choice.
+➡️ <your recommended answer>
 
-Phrase questions so “yes” accepts the recommendation. Wait for answers before dependent questions. Reuse settled answers rather than asking them again.
+---
 
-Challenge optional fallbacks, identity remodels, dependencies, test frameworks and abstractions against the smallest correct implementation. Ask whether a simpler existing pattern satisfies the criterion. Separate product decisions from facts established by repository or dataset inspection.
+❓ **Q2** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
 
-Work inline unless delegation is requested or required by applicable instructions. If delegating factual exploration, use the requested provider/model and a bounded brief; keep unrelated decisions moving while its result is pending.
+➡️ <your recommended answer>
+```
 
-Finish with agreed decisions, minimal implementation steps, verification and remaining blockers. Preserve exact scope and identify deviations from the supplied requirements. Grilling alone does not authorize implementation or dataset writes; proceed only within the user's existing task authorization after consequential decisions are settled.
+Word each question so "yes" accepts your recommended answer.
+
+Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
+
+Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent to find it; don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; ask the rest of the frontier now. The _decisions_ are the user's: put each to them and wait.
+
+The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.

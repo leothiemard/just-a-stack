@@ -9,14 +9,14 @@
     },
     {
       "id": 2,
-      "prompt": "Checkpoint after round 3. R1 remains disputed with a concrete rare data-loss failure path. The reviewer says CHANGES. The normal path passes all tests. What actions and verdict follow?",
-      "expected_output": "UNRESOLVED with both sides' evidence. No fourth round without a new budget. Do not downgrade the risk because it is rare, claim approval or push/merge.",
+      "prompt": "Checkpoint after round 3. An evidenced auth bug in the intended case remains open, has not stayed disputed after two replies, and fixes are authorized. What budget and gate apply?",
+      "expected_output": "Use the upstream conditional extension to at most five rounds for the open high-risk finding. Do not treat budget exhaustion as approval; report any remaining disagreement when the applicable limit or dispute stop is reached.",
       "files": []
     },
     {
       "id": 3,
       "prompt": "Checkpoint after an APPROVE on HEAD abc and scoped inputs A. The author then changed behavior to inputs B. No review budget remains. Is the change approved?",
-      "expected_output": "No. The prior approval is stale. Report UNRESOLVED; budget exhaustion is not approval.",
+      "expected_output": "No. The prior approval is stale. Report the unapproved/disputed outcome; budget exhaustion is not approval.",
       "files": []
     },
     {

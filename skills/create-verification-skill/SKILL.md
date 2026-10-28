@@ -1,52 +1,46 @@
 ---
 name: create-verification-skill
-description: Create or update a personal verify-app, verify-studio or verify-storybook skill usable across checkouts. Use for personal or cross-checkout verification skills. Project-local verifiers use pstack:create-verification-skill when available; otherwise this skill handles them too. Ordinary verification uses an existing verifier.
-metadata:
-  inspired-by: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/create-verification-skill/SKILL.md
-  visual-parity: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/poteto-mode/playbooks/visual-parity.md
+description: "Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform. Use for /create-verification-skill, \"make a control skill for this repo\", or when a project has no scripted way to prove UI/CLI/service behavior."
+disable-model-invocation: true
 ---
 
-# Create verification skill
+# Create a verification skill
 
-Generate instructions a fresh agent can execute against the real application. Discover commands and selectors from the repository and running surface, then prove one complete journey. Read `references/verifier-template.md` while authoring the result.
+Use the active harness's project-local skill directory for `<project-skill-dir>`: `.agents/skills` in Codex, `.claude/skills` in Claude Code, or `.cursor/skills` in Cursor.
 
-## Interview the repository
+Every serious project needs a scripted way to drive the real app and prove behavior: launch it, exercise a feature the way a user would, and capture evidence. This skill generates that as a project-local skill (`<project-skill-dir>/verify-<app>/`) tailored to the repo. You write the generator's output for the next agent, not for a human: it will be read cold, mid-task, by an agent that has never seen the app.
 
-Read applicable instructions, historical notes supplied by the user or project conventions, scripts, README, existing test harnesses, routes/stories, environment setup and current dependencies. Find:
+## 1. Interview the repo, not the user
 
-- **Surface:** web UI, Studio, Storybook, CLI, service or another user-facing interface; choose the requested surface.
-- **Launch:** exact documented command, working directory, readiness check, ports, auth and data preconditions.
-- **Drive:** existing Playwright/Cypress, browser, PTY or HTTP harness. Follow the active host's browser policy; a tool's availability does not authorize its use for verification. Inspect a snapshot before acting and use stable semantic selectors. Respect tab ownership and user-controlled sessions.
-- **Observe:** before/action/after evidence, user-visible results and relevant side effects.
-- **Isolate:** owned process IDs, port ownership, unique fixture IDs and safe concurrent-instance boundaries.
+Answer these from the codebase and only ask the user what you cannot observe:
 
-Resolve facts from the code rather than questioning the user. Ask only about missing target, access or consequential policy decisions. Report startup failures accurately; generating a skill is not authorization to repair unrelated code, install dependencies or alter shared `.env` symlinks.
+- **Surface:** what does a user actually touch? A web UI, a CLI/TUI, a desktop app, an API, a mobile app, a library? A repo can have several; pick the primary one and note the rest.
+- **Run:** how does the app start locally? Prefer the repo's own documented dev command (package scripts, Makefile, README quickstart). Note ports, env vars, seed data, auth.
+- **Drive:** how can an agent interact with it programmatically? Existing harnesses first — Playwright/Cypress specs, expect scripts, PTY helpers, curl-able endpoints, a debug port. Only then pick a generic recipe: browser/CDP for web and Electron, a tmux/PTY harness for CLI/TUI, plain HTTP for services.
+- **Observe:** what evidence can be captured? Screenshots, terminal transcripts, response bodies, logs, exit codes, DB state.
+- **Isolate:** can two instances run side by side (ports, data dirs, profiles)? If not, say so in the generated skill: refusing to double-drive a shared instance beats corrupting the user's session.
 
-## Generate a focused verifier
+If the checkout doesn't build or start as-is, fix that first (or report it precisely) before generating; a skill written against a broken base teaches wrong steps. When an irrelevant missing asset blocks startup (a static dir the API never serves, a sample config), the generated skill may create it, clearly marked as verification scaffolding, and remove it in cleanup.
 
-Default to `~/.agents/skills/verify-<project>-<surface>/` for a personal skill usable across checkouts, unless the active harness uses another personal skill root. Bind it by repository identity and discover the active checkout rather than hardcoding a stale worktree. Use a project-local skill directory only when requested, following that harness's conventions.
+## 2. Generate the skill
 
-Preserve an explicitly requested skill name such as `verify-storybook`; use the default naming pattern only when no name was given. If launching through a non-mutating alternative that skips a documented deployment hook, record that alternative and leave the original startup path unverified.
+Write `<project-skill-dir>/verify-<app>/SKILL.md` with YAML frontmatter (`name: verify-<app>` and a `description` that names the app, the surface, and when to reach for it — without frontmatter the skill never registers) and these sections, each grounded in what the interview actually found (no placeholders left):
 
-Inspect an existing same-name skill before updating it. Write `SKILL.md` with a matching kebab-case name and a precise description, plus `features/README.md` and up to three observed feature journeys. Include:
+- **Launch:** the exact command that starts the app for verification, and how to tell it's ready (a log line, a prompt). Launch must reach a usable state from an empty data dir, including any migrations and seed data. Ready means usable, not just that a process answers. A database health check can pass while its init scripts are still running. Include teardown. For a short-lived CLI or TUI there is no server to keep alive: launch means build the binary (or install deps) once, then start each drive in its own isolated PTY or tmux session.
+- **Doctor:** one read-only check that answers "is this instance worth driving?" — process up, right version/build, port owned by us, auth valid. An agent runs this first whenever anything looks off.
+- **Drive:** the harness recipe with real selectors/commands from this repo, not examples. Prefer stable handles (ARIA labels, data attributes, prompt strings, route paths) over coordinates and tab order.
+- **Evidence:** what to capture for a proof and where it goes. State the proof standards: exercise the real user path, not internal setters or test-only endpoints; capture the action and the resulting state, not just the final screen; verify side effects (files written, rows inserted, messages sent) alongside what's visible; mocks only where a production boundary already isolates the external system. When the safe path is a dry-run or test mode, verify what it actually skips by observing (files, network, git refs) rather than trusting its name: some dry-runs still touch the network or open a browser.
+- **Cleanup:** how to tear down instances the run created. Never kill by process name; kill what you started. Cleanup removes instances and scratch state, never the evidence: proof artifacts survive the teardown, in a location the skill names.
+- **Helpers:** any script the skill ships is executable and its invocation is shown in the skill body. A helper the reader has to reverse-engineer is not a helper.
 
-1. **Target and preconditions:** identity, surface, dataset/perspective if relevant, access and version evidence.
-2. **Launch and readiness:** exact commands or existing-instance reuse, observable usable state and owned-instance tracking.
-3. **Doctor:** read-only checks for correct build, target, port ownership and auth. Distinguish a login page from a usable app.
-4. **Drive:** actual routes/stories/selectors/commands and required fixture setup. Label unavailable prerequisites rather than inventing selectors or seed data.
-5. **Evidence:** action and resulting state, observable pass/fail assertions and artifacts kept in the user/caller's destination or project convention; otherwise use a task-specific scratch directory. Capture screenshots with a save-capable tool and use its returned path. Include viewport, route/story, revision and target metadata.
-6. **Cleanup:** stop only owned processes and remove only explicitly authorized exact-ID fixtures. Preserve evidence and the user's tabs/processes.
+## 3. Seed the feature map
 
-Treat generated feature maps as observed journeys, not proof of whole-application coverage. Use repository tools rather than adding a new harness by default. Commands that build Studio, create fixtures or call a dry-run require side-effect inspection and appropriate authorization.
+Create `<project-skill-dir>/verify-<app>/features/README.md` plus one file per user-facing feature you can identify (aim for the top 3-5 to start, from routes, commands, menus, or docs). Follow the shape in [`references/feature-map-example/`](references/feature-map-example/), with a README index and one file per feature. Each file answers, from the user's point of view: what the feature is, how to reach it, how to drive it with the harness, and what observable end state proves it works. The four H2s are `Sub-features`, `How to get to it (user POV)`, `Driving it with <harness>`, and `Gotchas`. If the seed data lacks a precondition that a journey needs, the journey reports a failure and the reason goes in that feature's `Gotchas`. Never weaken the journey to make it pass. The map is the repo's maintained verification source; a proof that drives one convenient entry point is incomplete when the map lists others.
 
-## Responsive and parity evidence
+## 4. Prove the generated skill before handing it over
 
-Discover project breakpoints and choose representative widths/states plus boundary widths for affected behavior. Keep data, fonts, locale, theme and viewport controlled. Use fresh snapshots after interactions.
+Run its own instructions end to end once: launch, doctor, drive ONE mapped feature (one is enough; the map exists so later runs can cover the rest), capture evidence, clean up. After cleanup, confirm the evidence still exists at the named location — a cleanup that eats the proof fails this step. Fix what fails, and run the generated cleanup after every failed iteration too, so broken attempts don't strand processes and ports. A generated skill that was never executed is a draft, not a deliverable. If you proved it in a stand-in for the real target (a container in place of a fresh VM, a local stack in place of a remote one), list every setup step the stand-in did that the target will not. Those steps stay unverified until a run on the real target covers them.
 
-For a parity task, capture the baseline before the change and compare against the same surface and conditions using the existing image-diff tooling. Preserve the baseline. Report the actual diff and existing configured tolerance; do not raise thresholds, mask changed regions or update snapshots to manufacture a pass. Visual inspection alone is a smoke check, not pixel-equivalence proof. An intentional design change needs its own expected outcome rather than a zero-diff claim.
+## 5. Offer the maintenance loop
 
-## Prove and hand over
-
-Execute launch → doctor → one mapped journey → evidence → cleanup. Verify evidence still exists afterward, including after a failed attempt. Fix only the generated instructions/helpers within scope and repeat the affected check when necessary.
-
-If auth, target access or authorization blocks execution, deliver an explicitly **unverified draft** with exact missing prerequisites, not a validated verifier. Record which journey, target and revision were exercised and which remain unverified. Do not create a PR or schedule maintenance unless requested.
+Point the user at `pstack:maintain-verification-skill` for keeping the map honest as the app changes. Suggest a cadence only if they ask.
