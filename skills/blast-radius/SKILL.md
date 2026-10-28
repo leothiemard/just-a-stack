@@ -1,40 +1,50 @@
 ---
 name: blast-radius
-description: Check persisted-data and contract compatibility for schema or GROQ renames, migrations, serialized APIs and deployment order. Use for contract blast-radius requests. General downstream-impact reviews use pstack:blast-radius when available; otherwise this skill handles them too. Skip cosmetic and isolated changes.
-metadata:
-  inspired-by: https://github.com/cursor/plugins/blob/1dcc2bacde73ddd284803b7af28164d0436198fc/pstack/skills/blast-radius/SKILL.md
+description: "Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use for 'blast radius of X', 'what could this break', or reviewing a small diff you don't trust."
+disable-model-invocation: true
 ---
 
 # Blast radius
 
-Find the one or two facts a change's safety depends on, then prove them using the real implementation. A caller list alone misses persisted documents, serialized contracts and deployment order.
+Find what a change breaks somewhere else, before it ships. Use for "blast radius of X", "what could this break", or reviewing a small diff you don't trust yet.
 
-## Establish the change
+Companion to `pstack:how` and `pstack:why`. `pstack:how` tells you what the code does. `pstack:why` tells you why it's shaped that way. Blast radius tells you what it breaks somewhere else.
 
-Read applicable project instructions, the supplied requirements and relevant linked documents/comments. Use historical notes identified by the user, calling workflow or project conventions; treat them as context, not current requirements. Without an external issue or notes directory, assess the stated goal against the actual code and contracts.
+Listing the callers is not the job. The agent can grep those in a second. The job is the breakage grep won't show you.
 
-Pin the checkout, base/head revisions and diff being assessed. For local work include the intended uncommitted changes; distinguish them from the remote PR. Inspect status before running anything. Preserve unrelated edits. For an existing PR, register it with this T3 thread when the linking tool is available.
+## Don't trust your own writeup
 
-## Trace the contract
+A blast-radius writeup that sounds right is worthless. It reads as convincing whether or not it's true. So don't hand back the writeup. Find the one or two facts the whole thing depends on and prove them by running code.
 
-1. State the observable behavior before and after, including changes not obvious in the diff.
-2. Identify the critical safety assertion, such as “every stored legacy selector still resolves during rollout.”
-3. Trace beyond symbol references: field names in GROQ strings, generated types, drafts/releases, references, migrations, API payloads, other apps, indexing and deployment timing. Inspect installed library versions and patches where behavior depends on them.
-4. Separate confirmed failures from plausible but unproven risks and checked-and-cleared cases. Cite real paths, lines or source documents. Bound negative-search claims by the searched scope.
-5. Prove the critical assertion with the cheapest meaningful check: an existing test, a scratch script importing the real library, read-only data comparison, or the running app. Reuse existing tooling before adding anything.
+### How sure are you
 
-For Sanity, establish the physical dataset behind any alias and the actual perspective. Compare raw, draft or release behavior only when relevant. Record code revision and observation time; generated types and successful builds do not prove existing content compatibility.
+For each fact the change's safety depends on, get it as far down this list as is cheap, and say where it stopped.
 
-Keep one-off scripts and evidence in the location specified by the user or calling workflow, following project conventions when present; otherwise use a task-specific scratch directory. Dataset writes, schema deployment, commits, pushes and PR creation require explicit user authorization. Check scripts for side effects before invoking them, including commands called dry-run or build.
+1. You said so. Worthless on its own.
+2. You pointed at the line. A real `file:line`, or the library's own source.
+3. You showed the bad case can't happen. You walked the failure step by step and it doesn't reach.
+4. You ran it. A script or test that calls the real code and fails loud if you're wrong.
+5. You reproduced it in the running app.
 
-Work inline unless delegation is requested or an applicable instruction requires it. Include the original brief, later constraints and prior findings in delegated work. In T3, discover available provider/model IDs and start each independent review round with a fresh delegated task.
+Step 4 is usually one small script that imports the same library the app ships and calls the exact function you're worried about.
 
-## Report
+## Steps
 
-- **Change:** one paragraph, revision and scope.
-- **Safety fact:** assertion, proof command/artifact and observed result; say unproven when evidence is missing.
-- **Confirmed risks:** failure path, impact, evidence and smallest verification/fix.
-- **Cleared:** checked cases and why they are safe.
-- **Remaining:** cheapest outstanding checks and rollout dependencies.
+1. Read the change. The diff, the symbols it adds, changes, and deletes, and what it now does differently, including the part the diff doesn't spell out. Use `pstack:why` step 2 to pull the PR and commits.
+2. Find the one fact it's safe because of. Most changes that look risky are safe because of a single fact, like "this call only drops already-dead cache entries and does nothing else". Find that fact. If it holds, most risky cases are cleared at once. Spend your time here, not on a long list of maybes.
+3. Look where grep stops. Read the source of the library you call, and check its pinned version and any local patch. Work out when things run: microtasks, unmount and teardown, Solid versus React. Follow what a symbol search misses: the JSON an API returns, a DB column, a wire format, another language reading the same bytes, a feature flag, code three hops downstream.
+4. Be honest about each risk. Give it a real chance of happening and a real cost if it does. Keep the risks you confirmed. List the ones you checked and cleared separately. Same rules as `pstack:why`. Cite a real `file:line`, a search that finds nothing is still an answer, and never make up a caller or an API.
+5. Prove the one fact. Write a script or test that runs the real code, run it, and paste what happened.
+6. For a big or wide change, run it as a `pstack:arena`. Ask more than one model the same question and merge the answers. Different models catch different real bugs.
 
-Use evidence levels: source inspected, failure path traced, real code executed, running surface reproduced. Report failed or unavailable checks accurately. Do not widen the implementation to resolve unrelated risks.
+## What to hand back
+
+- **What it does.** What changed, including the part that isn't obvious.
+- **The one fact it's safe because of.** State it, say which step you got it to, and show the proof. If you couldn't prove it, write unproven.
+- **Risks.** Each names how it breaks, the `file:line`, how likely and how bad, and how to check. Paste the proof for the ones that matter.
+- **Cleared.** What you checked and why it's fine.
+- **Before you merge.** The cheapest test or repro that catches the real bug, including the script you wrote.
+
+Write it through `pstack:unslop`, cite real code, and strip anything private before it goes anywhere public.
+
+**Reply:** the writeup above, with the one safety fact either proven or marked unproven.

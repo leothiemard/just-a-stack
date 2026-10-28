@@ -1,18 +1,47 @@
 ---
 name: full-stop
-description: Use when the user explicitly asks for full stop. Finish at a reviewed PR for the user to merge; never merge it.
-metadata:
-  inspired-by: https://github.com/t3dotgg/tstack/blob/7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd/skills/full-stop/SKILL.md
+description: Trigger this if the user says 'full stop', even as a closing "Full stop." that reads like emphasis.
 ---
 
-# Full stop
+# Full Stop
 
-Read [full-send](../full-send/SKILL.md) and follow its implementation, proof, Sol review, PR and CI workflow. The explicit full-stop request authorizes that work, including commits, pushes and lease-protected rebases of this task's branch. Replace its merge step with a handoff. Never merge, enable auto-merge, enter a merge queue, push to the default branch or delegate those actions.
+Do the same work as `full-send`, but stop with the PR ready for the user to merge.
+Never merge it.
 
-Before the first mutation, disable existing auto-merge and remove queue membership for requested PRs. If no PR exists yet, confirm that and apply these checks once it exists. Verify both states before every push, on each wake and at handoff. Report settings changed and any observed queue rebuild. Leave unrelated PR settings alone. If disarming or verification fails, stop before further mutation and ask. Unknown state is not off.
+Read [full-send](../full-send/SKILL.md) and follow its workflow, proof rules,
+review, and babysitting steps. An explicit "full stop" request authorizes that
+work without a separate "full send" request. That includes full-send's
+testing permission. A "full stop" request is the permission for the test
+methods Proof needs, even when a project file says to ask first, for
+example before computer use. Use those methods directly. Its merge
+permission does not apply. The overrides below take precedence.
 
-If another actor rearms merging after verified disarming, stop mutations and ask rather than silently reversing their decision. Carry the no-merge constraint and observed settings in any branch-owner handoff; require that owner to verify before its push. Do not claim control over external actors or merges between observations.
+## No merging
 
-Use full-send's merge gate as the readiness check. Read the live head, base, checks, reviews and mergeability again. Confirm the PR is open, not a draft, with auto-merge off and no queue entry. If someone else merged it, report that fact.
+You may commit, push, rebase, fix conflicts, and use `--force-with-lease` on
+this task's branch. Never merge, enable auto-merge, enter a merge queue, push
+to the default branch, bypass branch protection, or delegate those actions.
 
-Report READY, WAITING FOR REQUIRED APPROVAL or BLOCKED with the PR, final head, observed proof, actual reviewer outcome and remaining risks. Say whether the PR remains open and unmerged. Stop this run's watches before handing off or asking the user.
+Disable existing auto-merge and remove the PR from any merge queue before
+work begins; check again before each push. Report these changes. If you
+cannot prevent automatic merging, report the blocker before proceeding.
+
+## Stop at the gate
+
+Use full-send's merge gate as the readiness check. Replace its merge and
+final report steps with a handoff. Proof and review must cover the final diff;
+recheck behavior changes and meaningful conflict fixes before handoff.
+
+Fetch the target branch and check the live PR's head, base, checks, reviews,
+and mergeability. Confirm it is open, not a draft, and not set to merge
+without the user. If someone else merged it, report that instead.
+
+- **Ready to merge:** the merge gate passes. Leave the PR open and unmerged.
+- **Waiting for required approval:** only human approval remains. Confirm
+  that this is the actual blocker.
+- **Blocked:** explain what prevents readiness, what you tried, and what is
+  needed. Follow full-send's rules for asking the user.
+
+In T3 Code, call `unwatch_pull_request` before the handoff or a question.
+Report the PR link, final head, verdict, proof, reviewer outcome, and remaining
+risks. State whether the PR is still open and unmerged.

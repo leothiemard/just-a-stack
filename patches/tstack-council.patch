@@ -1,0 +1,14 @@
+--- a/skills/council/SKILL.md
++++ b/skills/council/SKILL.md
+@@ -14,7 +14,10 @@
+ or feedback. Use one strong model from each of three different providers, at
+ high reasoning effort. If the user's instructions name council members, use
+ those. Otherwise pick the latest flagship model from each provider, for
+-example Claude Opus, GPT Sol, and Gemini Pro.
++example Claude Opus, GPT Astra, and Gemini Pro.
++
++For this setup, prefer GPT-6 Astra (`gpt-6-astra`) for the OpenAI
++member unless the user names another model.
+ 
+ In T3 Code, use `orchestrator_capabilities` to resolve the models, then
+ `delegate_task` to start one delegate per model in parallel. Elsewhere, use
