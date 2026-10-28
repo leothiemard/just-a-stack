@@ -6,7 +6,7 @@ Sixteen portable personal skills shared between two independent machines. This i
 | --- | --- |
 | diagnosing-bugs | Reproduce, test explanations and verify a focused fix; includes performance measurement guidance. |
 | blast-radius | Trace contract and downstream risks beyond a diff. |
-| council | Gate a PR merge or an action on a commit on unanimous review by Opus 5.5 and GPT-6.1 Sol. |
+| council | Gate a PR merge or an action on a commit on unanimous review by Opus 5.5 and GPT-6 Astra. |
 | handoff | Transfer requirements, workspace state and evidence to another session or machine. |
 | grilling | Resolve consequential design decisions before implementation. |
 | retro | Turn observed workflow failures into a few focused improvements. |

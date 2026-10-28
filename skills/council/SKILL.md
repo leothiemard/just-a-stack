@@ -1,6 +1,6 @@
 ---
 name: council
-description: Gate merging a PR, or any action on a specific commit, on unanimous sign-off from a council of independent models (Opus 5.5 and GPT-6.1 Sol). Each reviews the same pinned commit at xhigh effort without changing anything. Use for "consult the council", "council this", "ask the council if this is safe", or "merge once the council is happy". Skip routine edits that need no second opinion.
+description: Gate merging a PR, or any action on a specific commit, on unanimous sign-off from a council of independent models (Opus 5.5 and GPT-6 Astra). Each reviews the same pinned commit at xhigh effort without changing anything. Use for "consult the council", "council this", "ask the council if this is safe", or "merge once the council is happy". Skip routine edits that need no second opinion.
 metadata:
   inspired-by: https://x.com/theo/status/2113565349300015227
 ---
@@ -14,7 +14,7 @@ Independent models review the same pinned commit in parallel without seeing each
 | Seat | Model | Effort |
 | --- | --- | --- |
 | Opus | `claude-opus-5-5` (Claude driver) | `effort: xhigh` |
-| Sol | `gpt-6.1-sol` (Codex driver) | `reasoningEffort: xhigh` |
+| Astra | `gpt-6-astra` (Codex driver) | `reasoningEffort: xhigh` |
 
 In T3, look up each seat with `orchestrator_capabilities` by driver and model. Do not assume provider instance names. Always pass the effort option so a member does not inherit yours. If the user names other members or another effort level, use those. If a seat cannot run, it is missing. The gate stays closed, and you do not swap in another model unless the user asks.
 
